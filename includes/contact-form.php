@@ -26,4 +26,26 @@ function cfmsedkiewicz_handle_enquiry($data)
 
     unset($params['_wpnonce']);
     unset($params['_wp_http_referer']);
+
+    //Send e-mail
+    $headers = [];
+
+    $admin_email = get_bloginfo('admin_email');
+    $admin_name = get_bloginfo('name');
+
+    $headers[] = "From: {$admin_name} < $admin_email >";
+    $headers[] = "Reply-to: {$params['name']} <{$params['email']}>";
+
+    $subject = "New e-mail from {$params['name']}";
+
+    $message = "";
+    $message.= "Message has been sent from {$params['name']} <br /><br />";
+
+    foreach($params as $label => $value) {
+        $message .= ucfirst($label) . ': ' . $value;
+    }
+
+    wp_mail($admin_email, $subject, $message, $headers);
+
+    return new WP_Rest_Response('Message has been sent', 200);
 }
