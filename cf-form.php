@@ -23,6 +23,10 @@ if( !defined('ABSPATH') ){
 if( !class_exists('CFFormMsedkiewicz')) {
     class CFFormMsedkiewicz {
 
+        public function __construct()
+        {
+            require_once( plugin_dir_path( __FILE__ ) . '/vendor/autoload.php');
+        }
     }
     new CFFormMsedkiewicz;
 }
