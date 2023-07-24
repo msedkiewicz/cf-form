@@ -33,6 +33,8 @@ if( !class_exists('CFFormMsedkiewicz')) {
             include_once CFFORM_PATH . 'includes/utilities.php';
 
             include_once CFFORM_PATH . 'includes/options-page.php';
+
+            include_once CFFORM_PATH . 'includes/contact-form.php';
         }
     }
 $cfForm = new CFFormMsedkiewicz;
