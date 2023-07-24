@@ -22,9 +22,7 @@
 
             var form = $(this);
 
-            console.log(form.serialize());
             $.ajax({
-
                 type: "POST",
                 url: "<?php echo get_rest_url(null, 'v1/contact-form/submit');?>",
                 data: form.serialize()

@@ -14,8 +14,8 @@ function cfmsedkiewicz_create_rest_endpoint()
     $callback = 'cfmsedkiewicz_handle_enquiry';
 
     register_rest_route('v1/contact-form', 'submit', array(
-        'methods' -> $post,
-        'callback' -> $callback,
+        'methods' => $post,
+        'callback' => $callback,
     ));
 }
 
