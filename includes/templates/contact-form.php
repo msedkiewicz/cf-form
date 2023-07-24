@@ -18,7 +18,8 @@
     jQuery(document).ready(function($){
 
         $("#enquiry_form").submit( function(event){
-            alert('test');
+            event.preventDefault();
+            alert('ok');
         })
     });
 </script>
