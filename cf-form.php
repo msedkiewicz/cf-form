@@ -30,7 +30,7 @@ if( !class_exists('CFFormMsedkiewicz')) {
         }
 
         public function initialize(){
-
+            include_once CFFORM_PATH . 'includes/utilities.php';
         }
     }
 $cfForm = new CFFormMsedkiewicz;
