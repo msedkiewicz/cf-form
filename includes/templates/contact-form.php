@@ -17,7 +17,7 @@
 <script>
     jQuery(document).ready(function($){
 
-        $(enquiry_form).submit( function(event){
+        $("#enquiry_form").submit( function(event){
             alert('test');
         })
     });
