@@ -24,5 +24,6 @@ function cfmsedkiewicz_handle_enquiry($data)
         return new WP_Rest_Response('Message not sent', 422);
     }
 
-    return new WP_Rest_Response('Message sent', 200);
+    unset($params['_wpnonce']);
+    unset($params['_wp_http_referer']);
 }
