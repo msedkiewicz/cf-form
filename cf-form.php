@@ -19,3 +19,10 @@ Domain Path:  /languages
 if( !defined('ABSPATH') ){
     die('Go and watch LOTR!');
 };
+
+if( !class_exists('CFFormMsedkiewicz')) {
+    class CFFormMsedkiewicz {
+
+    }
+    new CFFormMsedkiewicz;
+}
