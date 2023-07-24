@@ -1,4 +1,4 @@
-<form>
+<form id="enquiry_form">
     <label>Name</label><br />
     <input type="text" name="name"><br /><br />
 
@@ -13,3 +13,12 @@
 
     <button type="submit">Submit form</button>
 </form>
+
+<script>
+    jQuery(document).ready(function($){
+
+        $(enquiry_form).submit( function(event){
+            alert('test');
+        })
+    });
+</script>
