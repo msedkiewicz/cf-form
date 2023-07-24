@@ -13,7 +13,14 @@ function cfmsedkiewicz_load_carbon_fields() {
 function cfmsedkiewicz_create_options_page() {
     Container::make( 'theme_options', 'CF Form Options' )
     ->add_fields( array(
-        Field::make( 'text', 'crb_facebook_url') ,
-        Field::make( 'textarea', 'crb_footer_text' )
+        Field::make( 'checkbox', 'cfform_plugin_active', 'Is Active' ),
+
+        Field::make( 'text', 'cfform_plugin_recipients', __( 'Recipient Email') )
+            ->set_attribute( 'placeholder', 'youremail@gmail.com' )
+            ->set_help_text('The email that the form is submitted to'),
+
+        Field::make( 'textarea', 'cfform_plugin_message', __( 'Confirmation Message' ) )
+            ->set_attribute( 'placeholder', 'Enter confirmation message' )
+            ->set_help_text('Type the message you want the submitter to receive'),
     ) );
 }
