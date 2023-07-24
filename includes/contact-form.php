@@ -10,16 +10,19 @@ function cfmsedkiewicz_show_contact_form()
 
 function cfmsedkiewicz_create_rest_endpoint()
 {
-    $post = 'POST';
-    $callback = 'cfmsedkiewicz_handle_enquiry';
-
     register_rest_route('v1/contact-form', 'submit', array(
-        'methods' => $post,
-        'callback' => $callback,
+        'methods' => 'POST',
+        'callback' => 'cfmsedkiewicz_handle_enquiry',
     ));
 }
 
-function cfmsedkiewicz_handle_enquiry()
+function cfmsedkiewicz_handle_enquiry($data)
 {
-    echo 'hello';
+    $params = $data->get_params();
+    if( !wp_verify_nonce($params['_wpnonce'], 'wp_rest') )
+    {
+        return new WP_Rest_Response('Message not sent', 422);
+    }
+
+    return new WP_Rest_Response('Message sent', 200);
 }
