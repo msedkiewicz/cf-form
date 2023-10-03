@@ -35,14 +35,15 @@ function cfmsedkiewicz_handle_enquiry($data)
 
     $headers[] = "From: {$admin_name} < $admin_email >";
     $headers[] = "Reply-to: {$params['name']} <{$params['email']}>";
+    $headers[] = "Content-Type: text/html";
 
     $subject = "New e-mail from {$params['name']}";
 
     $message = "";
-    $message.= "Message has been sent from {$params['name']} <br /><br />";
+    $message.= "<h1>Message has been sent from {$params['name']}</h1>";
 
     foreach($params as $label => $value) {
-        $message .= ucfirst($label) . ': ' . $value;
+        $message .= '<strong>' . ucfirst($label) . '</strong>: ' . $value . '<br />';
     }
 
     wp_mail($admin_email, $subject, $message, $headers);

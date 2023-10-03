@@ -24,8 +24,6 @@
 
             var form = $(this);
 
-            alert(form.serialize());
-
             $.ajax({
                 type: "POST",
                 url: "<?php echo get_rest_url(null, 'v1/contact-form/submit');?>",
