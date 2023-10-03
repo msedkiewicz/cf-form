@@ -48,5 +48,5 @@ function cfmsedkiewicz_handle_enquiry($data)
 
     wp_mail($admin_email, $subject, $message, $headers);
 
-    return new WP_Rest_Response('Message has been sent', 200);
+    return new WP_Rest_Response('Message has been sent successfully.', 200);
 }

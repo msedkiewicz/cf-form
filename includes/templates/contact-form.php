@@ -31,10 +31,10 @@
                 type: "POST",
                 url: "<?php echo get_rest_url(null, 'v1/contact-form/submit');?>",
                 data: form.serialize(),
-                success: function(){
+                success: function(res){
                     form.hide();
 
-                    $("#form_success").html("Your message was sent.").fadeIn();
+                    $("#form_success").html(res).fadeIn();
                 },
                 error: function() {
                     $("#form_error").html("There was an error while submitting your form.").fadeIn();
