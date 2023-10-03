@@ -14,7 +14,7 @@ function cfmsedkiewicz_create_options_page() {
     Container::make( 'theme_options', 'CF Form Options' )
     ->set_icon('dashicons-email-alt')
     ->add_fields( array(
-        Field::make( 'checkbox', 'cfform_plugin_active', 'Is Active' ),
+        Field::make( 'checkbox', 'cfform_plugin_active', 'Active' ),
 
         Field::make( 'text', 'cfform_plugin_recipients', __( 'Recipient Email') )
             ->set_attribute( 'placeholder', 'youremail@gmail.com' )

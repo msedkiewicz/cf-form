@@ -4,7 +4,7 @@
 
 Plugin Name: Simple Contact Form
 Plugin URI: https://lenasedkiewicz.com/
-Description: Simple contact form
+Description: Simple Contact Form Plugin
 Version: 1.0
 Requires at least: 6.2
 Requires PHP: 8.0
