@@ -14,6 +14,9 @@ function cfmsedkiewicz_create_submissions_page() {
         'labels' => [
             'name' => 'Submissions',
             'singular_name' => 'Submission'
+        ],
+        'capabilities' => [
+            'create_posts' => 'do_not_allow'
         ]
     ];
     register_post_type('submission', $args);
