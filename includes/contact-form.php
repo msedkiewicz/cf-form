@@ -37,6 +37,10 @@ function cfmsedkiewicz_display_submission() {
     }
 
     echo '</ul>';
+
+    /* hardcoding option
+
+    echo 'Name: ' . get_post_meta( get_the_ID(), 'name', true ); */
 }
 
 function cfmsedkiewicz_create_meta_box() {
