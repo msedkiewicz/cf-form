@@ -15,9 +15,14 @@ function cfmsedkiewicz_create_submissions_page() {
             'name' => 'Submissions',
             'singular_name' => 'Submission'
         ],
-        'capabilities' => [
-            'create_posts' => 'do_not_allow'
+        'supports' => [
+            // 'title',
+            // 'editor',
+            'custom-fields'
         ]
+        // 'capabilities' => [
+        //     'create_posts' => 'do_not_allow'
+        // ]
     ];
     register_post_type('submission', $args);
 }
@@ -65,8 +70,17 @@ function cfmsedkiewicz_handle_enquiry($data)
     $message = "";
     $message.= "<h1>Message has been sent from {$params['name']}</h1>";
 
+    $postarr = [
+        'post_title' => $params['name'],
+        'post_type' => 'submission'
+    ];
+
+    $post_id = wp_insert_post($postarr);
+
     foreach($params as $label => $value) {
         $message .= '<strong>' . ucfirst($label) . '</strong>: ' . $value . '<br />';
+
+        add_post_meta($post_id, $label, $value);
     }
 
     wp_mail($admin_email, $subject, $message, $headers);
