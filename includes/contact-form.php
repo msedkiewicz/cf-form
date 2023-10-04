@@ -28,9 +28,13 @@ function cfmsedkiewicz_create_submissions_page() {
 function cfmsedkiewicz_display_submission() {
     $postmetas = get_post_meta( get_the_ID() );
 
+    echo '<ul>';
+
     foreach($postmetas as $key => $value) {
-        echo $key . ': ' . $value[0];
+        echo '<li>' . $key . ': ' . $value[0] . '</li>';
     }
+
+    echo '</ul>';
 }
 
 function cfmsedkiewicz_create_meta_box() {
