@@ -3,6 +3,7 @@
 add_shortcode('contact', 'cfmsedkiewicz_show_contact_form');
 add_action('rest_api_init', 'cfmsedkiewicz_create_rest_endpoint');
 add_action('init', 'cfmsedkiewicz_create_submissions_page');
+add_action('add_meta_boxes', 'cfmsedkiewicz_create_meta_box');
 
 /* creating CPT for submissions */
 
@@ -15,16 +16,25 @@ function cfmsedkiewicz_create_submissions_page() {
             'name' => 'Submissions',
             'singular_name' => 'Submission'
         ],
-        'supports' => [
-            // 'title',
-            // 'editor',
-            'custom-fields'
-        ]
+        'supports' => false
         // 'capabilities' => [
         //     'create_posts' => 'do_not_allow'
         // ]
     ];
     register_post_type('submission', $args);
+}
+
+/* create meta box for data display */
+function cfmsedkiewicz_display_submission() {
+    $postmetas = get_post_meta( get_the_ID() );
+
+    foreach($postmetas as $key => $value) {
+        echo $key . ': ' . $value[0];
+    }
+}
+
+function cfmsedkiewicz_create_meta_box() {
+    add_meta_box('cfmsedkiewicz_custom_contact_form', 'Submission', 'cfmsedkiewicz_display_submission', 'submission');
 }
 
 /* display CF template on a front-end */
