@@ -28,10 +28,12 @@ function cfmsedkiewicz_create_submissions_page() {
 function cfmsedkiewicz_display_submission() {
     $postmetas = get_post_meta( get_the_ID() );
 
+    unset($postmetas['_edit_lock']);
+
     echo '<ul>';
 
     foreach($postmetas as $key => $value) {
-        echo '<li><strong>' . ucfirst($key) . '</strong>: ' . $value[0] . '</li>';
+        echo '<li><strong>' . ucfirst($key) . '</strong>:<br />' . $value[0] . '</li>';
     }
 
     echo '</ul>';
