@@ -31,7 +31,7 @@ function cfmsedkiewicz_display_submission() {
     echo '<ul>';
 
     foreach($postmetas as $key => $value) {
-        echo '<li>' . $key . ': ' . $value[0] . '</li>';
+        echo '<li><strong>' . ucfirst($key) . '</strong>: ' . $value[0] . '</li>';
     }
 
     echo '</ul>';
