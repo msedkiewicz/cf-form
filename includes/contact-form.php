@@ -2,11 +2,22 @@
 
 add_shortcode('contact', 'cfmsedkiewicz_show_contact_form');
 add_action('rest_api_init', 'cfmsedkiewicz_create_rest_endpoint');
+add_action('init', 'cfmsedkiewicz_create_submissions_page');
+
+/* creating CPT for submissions */
+
+function cfmsedkiewicz_create_submissions_page() {
+    
+}
+
+/* display CF template on a front-end */
 
 function cfmsedkiewicz_show_contact_form()
 {
     include CFFORM_PATH . '/includes/templates/contact-form.php';
 }
+
+/* E-mail sending logic */
 
 function cfmsedkiewicz_create_rest_endpoint()
 {
