@@ -7,7 +7,16 @@ add_action('init', 'cfmsedkiewicz_create_submissions_page');
 /* creating CPT for submissions */
 
 function cfmsedkiewicz_create_submissions_page() {
-    
+
+    $args = [
+        'public' => true,
+        'has_archive' => true,
+        'labels' => [
+            'name' => 'Submissions',
+            'singular_name' => 'Submission'
+        ]
+    ];
+    register_post_type('submission', $args);
 }
 
 /* display CF template on a front-end */
