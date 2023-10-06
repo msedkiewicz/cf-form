@@ -1,4 +1,4 @@
 body {
     background-color: aqua;
-    color: pink;
+    color: pink !important;
 }

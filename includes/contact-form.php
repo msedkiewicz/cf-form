@@ -17,7 +17,7 @@ add_action('wp_enqueue_scripts', 'cfmsedkiewicz_enqueue_custom_scripts');
 /* enqueue custom stylesheet for form */
 
 function cfmsedkiewicz_enqueue_custom_scripts() {
-    wp_enqueue_style('cfmsedkiewicz-cfform', plugin_dir_url( __FILE__ ) . '/assets/css/cfmsedkiewicz.css' );
+    wp_enqueue_style('cfmsedkiewicz-cfform', CFFORM_URL . '/assets/css/cfmsedkiewicz.css' );
 }
 
 /* creating CPT for submissions */
