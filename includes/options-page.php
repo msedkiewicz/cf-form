@@ -16,6 +16,7 @@ function cfmsedkiewicz_load_carbon_fields() {
 
 function cfmsedkiewicz_create_options_page() {
     Container::make( 'theme_options', 'CF Form Options' )
+    ->set_page_menu_position(30)
     ->set_icon('dashicons-email-alt')
     ->add_fields( array(
         Field::make( 'checkbox', 'cfform_plugin_active', 'Active' ),
