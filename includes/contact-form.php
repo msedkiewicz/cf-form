@@ -10,6 +10,8 @@ add_filter('manage_submission_posts_columns', 'cfmsedkiewicz_custom_submission_c
 
 add_action('manage_submission_posts_custom_column', 'cfmsedkiewicz_fill_submission_columns', 10, 2);
 
+add_action('admin_init', 'cfmsedkiewicz_setup_search');
+
 /* creating CPT for submissions */
 
 function cfmsedkiewicz_create_submissions_page() {
@@ -90,7 +92,38 @@ function cfmsedkiewicz_fill_submission_columns($column, $post_id) {
         break;
     }
 }
+/* Add broader search option on backend*/
+function cfmsedkiewicz_setup_search() {
+    global $typenow;
 
+    if($typenow == 'submission') {
+        add_filter('posts_search', 'cfmsedkiewicz_submission_search_override', 10, 2);
+    }
+}
+
+function cfmsedkiewicz_submission_search_override($search, $query) {
+    // Override the submissions page search to include custom meta data
+
+    global $wpdb;
+
+    if ($query->is_main_query() && !empty($query->query['s'])) {
+          $sql    = "
+            or exists (
+                select * from {$wpdb->postmeta} where post_id={$wpdb->posts}.ID
+                and meta_key in ('name','email','phone')
+                and meta_value like %s
+            )
+        ";
+          $like   = '%' . $wpdb->esc_like($query->query['s']) . '%';
+          $search = preg_replace(
+                "#\({$wpdb->posts}.post_title LIKE [^)]+\)\K#",
+                $wpdb->prepare($sql, $like),
+                $search
+          );
+    }
+
+    return $search;
+}
 /* display CF template on a front-end */
 
 function cfmsedkiewicz_show_contact_form()
