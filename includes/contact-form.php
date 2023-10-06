@@ -226,5 +226,15 @@ function cfmsedkiewicz_handle_enquiry($data)
 
     wp_mail($recipient_email, $subject, $message, $headers);
 
-    return new WP_Rest_Response('Message has been sent successfully.', 200);
+    // Set custom confirmation message
+
+    $confirmation_message = 'Message has been sent successfully.';
+
+    if(cfmsedkiewicz_get_plugin_options('cfform_plugin_message')){
+        $confirmation_message = cfmsedkiewicz_get_plugin_options('cfform_plugin_message');
+        $confirmation_message = str_replace('{name}', $params['name'], $confirmation_message);
+    }
+
+    // Return successful response
+    return new WP_Rest_Response($confirmation_message, 200);
 }
