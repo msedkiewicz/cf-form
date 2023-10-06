@@ -30,19 +30,26 @@ function cfmsedkiewicz_create_submissions_page() {
 function cfmsedkiewicz_display_submission() {
     $postmetas = get_post_meta( get_the_ID() );
 
-    unset($postmetas['_edit_lock']);
+    // unset($postmetas['_edit_lock']);
 
-    echo '<ul>';
+    // echo '<ul>';
 
-    foreach($postmetas as $key => $value) {
-        echo '<li><strong>' . ucfirst($key) . '</strong>:<br />' . $value[0] . '</li>';
-    }
+    // foreach($postmetas as $key => $value) {
+    //     echo '<li><strong>' . ucfirst($key) . '</strong>:<br />' . $value[0] . '</li>';
+    // }
 
-    echo '</ul>';
+    // echo '</ul>';
 
     /* hardcoding option
 
     echo 'Name: ' . get_post_meta( get_the_ID(), 'name', true ); */
+
+    echo '<ul>';
+    echo '<li><strong>Name:</strong><br />' . get_post_meta( get_the_ID(), 'name', true ) . '</li>';
+    echo '<li><strong>Email:</strong><br />' . get_post_meta( get_the_ID(), 'email', true ) . '</li>';
+    echo '<li><strong>Phone:</strong><br />' . get_post_meta( get_the_ID(), 'phone', true ) . '</li>';
+    echo '<li><strong>message:</strong><br />' . get_post_meta( get_the_ID(), 'message', true ) . '</li>';
+    echo '</ul>';
 }
 
 function cfmsedkiewicz_create_meta_box() {
