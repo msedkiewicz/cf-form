@@ -12,6 +12,14 @@ add_action('manage_submission_posts_custom_column', 'cfmsedkiewicz_fill_submissi
 
 add_action('admin_init', 'cfmsedkiewicz_setup_search');
 
+add_action('wp_enqueue_scripts', 'cfmsedkiewicz_enqueue_custom_scripts');
+
+/* enqueue custom stylesheet for form */
+
+function cfmsedkiewicz_enqueue_custom_scripts() {
+    wp_enqueue_style('cfmsedkiewicz-cfform', plugin_dir_url( __FILE__ ) . '/assets/css/cfmsedkiewicz.css' );
+}
+
 /* creating CPT for submissions */
 
 function cfmsedkiewicz_create_submissions_page() {
