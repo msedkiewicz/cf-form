@@ -33,6 +33,7 @@ if( !class_exists('CFFormMsedkiewicz')) {
         }
 
         public function initialize(){
+            include_once CFFORM_PATH . 'includes/utilities.php';
 
             include_once CFFORM_PATH . 'includes/options-page.php';
 

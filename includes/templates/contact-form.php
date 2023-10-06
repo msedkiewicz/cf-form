@@ -1,3 +1,5 @@
+<?php if( cfmsedkiewicz_get_plugin_options('cfform_plugin_active') ): ?>
+
 <div id="form_success" style="background:green; color:#fff;"></div>
 <div id="form_error" style="background:red; color:#fff;"></div>
 
@@ -43,3 +45,9 @@
         });
     });
 </script>
+
+<?php else: ?>
+
+    <p>This form is not active</p>
+
+<?php endif; ?>
