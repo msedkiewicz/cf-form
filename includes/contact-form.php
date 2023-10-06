@@ -16,10 +16,12 @@ function cfmsedkiewicz_create_submissions_page() {
             'name' => 'Submissions',
             'singular_name' => 'Submission'
         ],
-        'supports' => false
-        // 'capabilities' => [
-        //     'create_posts' => 'do_not_allow'
-        // ]
+        'supports' => false,
+        'capability_type' => 'post',
+        'capabilities' => array(
+            'create_posts' => 'false'
+        ),
+        // 'map_meta_cap' => false, // with true users are allowed to edit post
     ];
     register_post_type('submission', $args);
 }
