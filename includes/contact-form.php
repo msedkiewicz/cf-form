@@ -155,12 +155,22 @@ function cfmsedkiewicz_create_rest_endpoint()
 
 function cfmsedkiewicz_handle_enquiry($data)
 {
+    //Get all parameters from form
     $params = $data->get_params();
+
+    // Set fields from the form
+    $field_name = sanitize_text_field( $params['name'] );
+    $field_email = sanitize_email( $params['email'] );
+    $field_phone = sanitize_text_field( $params['phone'] );
+    $field_message = sanitize_textarea_field( $params['message'] );
+
+    // Check if nonce is valid, if not, respond back with error
     if( !wp_verify_nonce($params['_wpnonce'], 'wp_rest') )
     {
         return new WP_Rest_Response('Message not sent', 422);
     }
 
+    // Remove unneeded data from parameters
     unset($params['_wpnonce']);
     unset($params['_wp_http_referer']);
 
@@ -171,16 +181,16 @@ function cfmsedkiewicz_handle_enquiry($data)
     $admin_name = get_bloginfo('name');
 
     $headers[] = "From: {$admin_name} < $admin_email >";
-    $headers[] = "Reply-to: {$params['name']} <{$params['email']}>";
+    $headers[] = "Reply-to: {$field_name} <{$field_email}>";
     $headers[] = "Content-Type: text/html";
 
-    $subject = "New e-mail from {$params['name']}";
+    $subject = "New e-mail from {$field_name}";
 
     $message = "";
-    $message.= "<h1>Message has been sent from {$params['name']}</h1>";
+    $message.= "<h1>Message has been sent from {$field_name}</h1>";
 
     $postarr = [
-        'post_title' => $params['name'],
+        'post_title' => $field_name,
         'post_type' => 'submission',
         'post_status' => 'publish'
     ];
@@ -188,9 +198,23 @@ function cfmsedkiewicz_handle_enquiry($data)
     $post_id = wp_insert_post($postarr);
 
     foreach($params as $label => $value) {
-        $message .= '<strong>' . ucfirst($label) . '</strong>: ' . $value . '<br />';
 
-        add_post_meta($post_id, $label, sanitize_text_field($value) );
+        switch($label) {
+            case 'message':
+                $value = sanitize_textarea_field($value);
+            break;
+
+            case 'email':
+                $value = sanitize_email($value);
+            break;
+
+            default:
+                $value = sanitize_text_field($value);
+        }
+
+        add_post_meta($post_id, sanitize_text_field($label), $value);
+
+        $message .= '<strong>' . sanitize_text_field( ucfirst($label) ) . '</strong>: ' . $value . '<br />';
     }
 
     wp_mail($admin_email, $subject, $message, $headers);
