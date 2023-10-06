@@ -92,7 +92,8 @@ function cfmsedkiewicz_handle_enquiry($data)
 
     $postarr = [
         'post_title' => $params['name'],
-        'post_type' => 'submission'
+        'post_type' => 'submission',
+        'post_status' => 'publish'
     ];
 
     $post_id = wp_insert_post($postarr);
