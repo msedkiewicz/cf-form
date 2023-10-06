@@ -21,7 +21,7 @@ function cfmsedkiewicz_create_submissions_page() {
         'capabilities' => array(
             'create_posts' => 'false'
         ),
-        // 'map_meta_cap' => false, // with true users are allowed to edit post
+        'map_meta_cap' => true, // with true users are allowed to edit /delete post
     ];
     register_post_type('submission', $args);
 }
