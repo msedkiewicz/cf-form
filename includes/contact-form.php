@@ -180,6 +180,13 @@ function cfmsedkiewicz_handle_enquiry($data)
     $admin_email = get_bloginfo('admin_email');
     $admin_name = get_bloginfo('name');
 
+    //Set recipient e-mail
+    $recipient_email = cfmsedkiewicz_get_plugin_options('cfform_plugin_recipients');
+
+    if(!$recipient_email){
+        $recipient_email = $admin_email;
+    }
+
     $headers[] = "From: {$admin_name} < $admin_email >";
     $headers[] = "Reply-to: {$field_name} <{$field_email}>";
     $headers[] = "Content-Type: text/html";
@@ -217,7 +224,7 @@ function cfmsedkiewicz_handle_enquiry($data)
         $message .= '<strong>' . sanitize_text_field( ucfirst($label) ) . '</strong>: ' . $value . '<br />';
     }
 
-    wp_mail($admin_email, $subject, $message, $headers);
+    wp_mail($recipient_email, $subject, $message, $headers);
 
     return new WP_Rest_Response('Message has been sent successfully.', 200);
 }
