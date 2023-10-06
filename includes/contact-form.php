@@ -1,9 +1,12 @@
 <?php
 
 add_shortcode('contact', 'cfmsedkiewicz_show_contact_form');
+
 add_action('rest_api_init', 'cfmsedkiewicz_create_rest_endpoint');
 add_action('init', 'cfmsedkiewicz_create_submissions_page');
 add_action('add_meta_boxes', 'cfmsedkiewicz_create_meta_box');
+
+add_filter('manage_submission_posts_columns', 'cfmsedkiewicz_custom_submission_columns');
 
 /* creating CPT for submissions */
 
@@ -50,6 +53,20 @@ function cfmsedkiewicz_display_submission() {
     echo '<li><strong>Phone:</strong><br />' . get_post_meta( get_the_ID(), 'phone', true ) . '</li>';
     echo '<li><strong>message:</strong><br />' . get_post_meta( get_the_ID(), 'message', true ) . '</li>';
     echo '</ul>';
+}
+
+/* Creating custom columns to display data */
+
+function cfmsedkiewicz_custom_submission_columns($columns) {
+    $columns = array(
+        'cb' => $columns['cb'],
+        'name' => __('Name', 'cfform'),
+        'email' => __('Email', 'cfform'),
+        'phone' => __('Phone', 'cfform'),
+        'message' => __('Message', 'cfform'),
+    );
+
+    return $columns;
 }
 
 function cfmsedkiewicz_create_meta_box() {
