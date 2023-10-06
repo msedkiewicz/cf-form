@@ -8,6 +8,8 @@ add_action('add_meta_boxes', 'cfmsedkiewicz_create_meta_box');
 
 add_filter('manage_submission_posts_columns', 'cfmsedkiewicz_custom_submission_columns');
 
+add_action('manage_submission_posts_custom_column', 'cfmsedkiewicz_fill_submission_columns', 10, 2);
+
 /* creating CPT for submissions */
 
 function cfmsedkiewicz_create_submissions_page() {
@@ -55,6 +57,9 @@ function cfmsedkiewicz_display_submission() {
     echo '</ul>';
 }
 
+function cfmsedkiewicz_create_meta_box() {
+    add_meta_box('cfmsedkiewicz_custom_contact_form', 'Submission', 'cfmsedkiewicz_display_submission', 'submission');
+}
 /* Creating custom columns to display data */
 
 function cfmsedkiewicz_custom_submission_columns($columns) {
@@ -69,8 +74,21 @@ function cfmsedkiewicz_custom_submission_columns($columns) {
     return $columns;
 }
 
-function cfmsedkiewicz_create_meta_box() {
-    add_meta_box('cfmsedkiewicz_custom_contact_form', 'Submission', 'cfmsedkiewicz_display_submission', 'submission');
+function cfmsedkiewicz_fill_submission_columns($column, $post_id) {
+    switch($column) {
+        case 'name':
+            echo get_post_meta($post_id, 'name', true);
+        break;
+        case 'email':
+            echo get_post_meta($post_id, 'email', true);
+        break;
+        case 'phone':
+            echo get_post_meta($post_id, 'phone', true);
+        break;
+        case 'message':
+            echo get_post_meta($post_id, 'message', true);
+        break;
+    }
 }
 
 /* display CF template on a front-end */
