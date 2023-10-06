@@ -1,5 +1,9 @@
 <?php
 
+if( !defined('ABSPATH') ){
+    die('Go and watch LOTR!');
+};
+
 add_shortcode('contact', 'cfmsedkiewicz_show_contact_form');
 
 add_action('rest_api_init', 'cfmsedkiewicz_create_rest_endpoint');

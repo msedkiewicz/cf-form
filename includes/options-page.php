@@ -1,5 +1,9 @@
 <?php
 
+if( !defined('ABSPATH') ){
+    die('Go and watch LOTR!');
+};
+
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
